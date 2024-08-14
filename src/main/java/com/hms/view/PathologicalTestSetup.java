@@ -6,7 +6,7 @@ package com.hms.view;
 
 /**
  *
- * @author Samir Al Fayed Ifti
+ * @author Md. Samir Al Fayed Ifti
  */
 public class PathologicalTestSetup extends javax.swing.JFrame {
 
