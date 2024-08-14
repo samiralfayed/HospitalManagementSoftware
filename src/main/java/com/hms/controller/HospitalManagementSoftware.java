@@ -8,7 +8,7 @@ import com.hms.view.Home;
 
 /**
  *
- * @author SIMEC Institute
+ * @author Samir Al Fayed Ifti
  */
 public class HospitalManagementSoftware {
 
