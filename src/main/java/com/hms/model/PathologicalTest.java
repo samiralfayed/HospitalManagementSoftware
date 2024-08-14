@@ -6,7 +6,8 @@ package com.hms.model;
 
 /**
  *
- * @author Samir
+ * @author Samir Al Fayed Ifti
+
  */
 public class PathologicalTest {
     

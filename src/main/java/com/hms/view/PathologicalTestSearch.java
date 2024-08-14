@@ -6,7 +6,7 @@ package com.hms.view;
 
 /**
  *
- * @author SIMEC Institute
+ * @author  Samir Al Fayed Ifti
  */
 public class PathologicalTestSearch extends javax.swing.JFrame {
 
