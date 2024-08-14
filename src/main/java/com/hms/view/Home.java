@@ -6,7 +6,7 @@ package com.hms.view;
 
 /**
  *
- * @author SIMEC Institute
+ * @author MD. Samir Al Fayed Ifti
  */
 public class Home extends javax.swing.JFrame {
 
