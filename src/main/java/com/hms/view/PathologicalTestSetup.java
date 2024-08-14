@@ -6,7 +6,7 @@ package com.hms.view;
 
 /**
  *
- * @author SIMEC Institute
+ * @author Samir Al Fayed Ifti
  */
 public class PathologicalTestSetup extends javax.swing.JFrame {
 
@@ -98,7 +98,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSubmit)
                     .addComponent(BtnCancel))
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
