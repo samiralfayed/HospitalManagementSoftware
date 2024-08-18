@@ -38,6 +38,11 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
         labelsearchpathelogicaltest.setText("Search Patheloogical Test");
 
         BtnSearch.setText("Search");
+        BtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSearchActionPerformed(evt);
+            }
+        });
 
         txtOutput.setColumns(20);
         txtOutput.setRows(5);
@@ -94,6 +99,11 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_BtnCancelActionPerformed
+
+    private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_BtnSearchActionPerformed
 
     /**
      * @param args the command line arguments

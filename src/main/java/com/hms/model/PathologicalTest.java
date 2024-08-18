@@ -10,7 +10,7 @@ package com.hms.model;
 
  */
 public class PathologicalTest {
-    
+  
     String title;
     double cost;
     boolean isAvailable;
