@@ -4,6 +4,8 @@
  */
 package com.hms.view;
 
+import com.hms.model.PathologicalTest;
+
 /**
  *
  * @author Md. Samir Al Fayed Ifti
@@ -26,14 +28,18 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         labeltesttitke = new javax.swing.JLabel();
         labeltestcost = new javax.swing.JLabel();
         labelavailability = new javax.swing.JLabel();
         txtTitle = new javax.swing.JTextField();
         txtCost = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        SelectCheckbox = new javax.swing.JCheckBox();
         BtnSubmit = new javax.swing.JButton();
         BtnCancel = new javax.swing.JButton();
+        labeloutput = new javax.swing.JLabel();
+        labeltesttype = new javax.swing.JLabel();
+        txttesttype = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,14 +49,29 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
 
         labelavailability.setText("Available?");
 
-        jCheckBox1.setText("(No by Default)");
+        SelectCheckbox.setText("(No by Default)");
 
         BtnSubmit.setText("Submit");
+        BtnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSubmitActionPerformed(evt);
+            }
+        });
 
         BtnCancel.setText("Cancel");
         BtnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCancelActionPerformed(evt);
+            }
+        });
+
+        labeloutput.setText("Output");
+
+        labeltesttype.setText("Test Type:");
+
+        txttesttype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttesttypeActionPerformed(evt);
             }
         });
 
@@ -61,21 +82,30 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labeltesttitke, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labeltestcost, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtTitle)
-                        .addComponent(txtCost, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BtnSubmit)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(77, 77, 77)
-                        .addComponent(BtnCancel)))
-                .addContainerGap(299, Short.MAX_VALUE))
+                        .addComponent(labelavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(SelectCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labeltesttitke, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labeltestcost, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labeltesttype, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txttesttype, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(BtnSubmit)
+                                .addGap(77, 77, 77)
+                                .addComponent(BtnCancel))
+                            .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(171, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labeloutput, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,22 +113,29 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labeltesttitke, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(8, 8, 8)
+                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labeltestcost, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labeltestcost, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addGap(58, 58, 58)
+                    .addComponent(txttesttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labeltesttype))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SelectCheckbox)
+                    .addComponent(labelavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSubmit)
                     .addComponent(BtnCancel))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labeloutput, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -109,49 +146,99 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnCancelActionPerformed
 
+    private void BtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSubmitActionPerformed
+        // TODO add your handling code here:
+        //String testTitle = txtTitle.getText();
+        //String testCost = txtCost.getText();
+        //boolean isAvailable = SelectCheckbox.isSelected();
+        
+//        String testTitle = txtTitle.getText();
+//        labeloutput.setText(testTitle);
+//        String testCost = txtTitle.getText();
+//        labeloutput.setText(testCost);
+        
+        PathologicalTest pTest = new PathologicalTest(txtTitle.getText(), 
+                                                      Double.parseDouble(txtCost.getText()), 
+                                                      SelectCheckbox.isSelected());
+        labeloutput.setText(pTest.show());
+
+        // Validate the inputs (e.g., ensure that the title and cost are not empty)
+//        if (testTitle.isEmpty() || testCost.isEmpty()) {
+//            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+//
+//        try {
+//            double cost = Double.parseDouble(testCost); // Attempt to parse the cost as a double
+//
+//            // Perform any further processing, such as saving the data to a database
+//            // For now, let's just display the collected data in a confirmation dialog
+//            String availabilityText = isAvailable ? "Yes" : "No";
+//            String message = "Test Title: " + testTitle + "\nTest Cost: BDT" + cost + "\nAvailable: " + availabilityText;
+//
+//            javax.swing.JOptionPane.showMessageDialog(this, message, "Test Submitted", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+//
+//            // Optionally, clear the form fields after submission
+//            txtTitle.setText("");
+//            txtCost.setText("");
+//            SelectCheckbox.setSelected(false);
+//
+//        } catch (NumberFormatException e) {
+//            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+//        }
+    }//GEN-LAST:event_BtnSubmitActionPerformed
+
+    private void txttesttypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttesttypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttesttypeActionPerformed
+
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new PathologicalTestSetup().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PathologicalTestSetup().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancel;
     private javax.swing.JButton BtnSubmit;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox SelectCheckbox;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel labelavailability;
+    private javax.swing.JLabel labeloutput;
     private javax.swing.JLabel labeltestcost;
     private javax.swing.JLabel labeltesttitke;
+    private javax.swing.JLabel labeltesttype;
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtTitle;
+    private javax.swing.JTextField txttesttype;
     // End of variables declaration//GEN-END:variables
 }
