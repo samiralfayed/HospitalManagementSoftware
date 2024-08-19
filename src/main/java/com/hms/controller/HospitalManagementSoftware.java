@@ -5,6 +5,7 @@
 package com.hms.controller;
 
 import com.hms.view.Home;
+import com.hms.view.LoginPage;
 
 /**
  *
@@ -14,7 +15,8 @@ public class HospitalManagementSoftware {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-         new Home().setVisible(true);
+         new LoginPage().setVisible(true);
+//         new Home().setVisible(true);
          
     }
 }
