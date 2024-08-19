@@ -4,6 +4,7 @@
  */
 package com.hms.view;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -122,68 +123,82 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
         // TODO add your handling code here:
-         System.out.println("Username field action performed.");
+        System.out.println("Username field action performed.");
     }//GEN-LAST:event_txtusernameActionPerformed
 
     private void TxtloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtloginActionPerformed
         // TODO add your handling code here:
         String username = txtusername.getText();
-    String password = txtpassword.getText();
+        String password = txtpassword.getText();
 
-    // Check if the username or password fields are empty
-    if (username.isEmpty() && password.isEmpty()) {
-        // Show an error message if both fields are empty
-        txtoutput.setText("Error: Both username and password fields must be filled out.");
-    } else if (username.isEmpty()) {
-        // Show an error message if the username field is empty
-        txtoutput.setText("Error: Username field must be filled out.");
-    } else if (password.isEmpty()) {
-        // Show an error message if the password field is empty
-        txtoutput.setText("Error: Password field must be filled out.");
-    } else if (authenticate(username, password)) {
-        // If authentication is successful
-        boolean isLoggedIn = true;
-        txtoutput.setText("Welcome, " + username + "!");
-    } else {
-        // Show an error message if authentication fails
-        txtoutput.setText("Invalid username or password.");
-    }
+        // Check if the username or password fields are empty
+        if (username.isEmpty() && password.isEmpty()) {
+            // Show an error message if both fields are empty
+            txtoutput.setText("Error: Both username and password fields must be filled out.");
+        } else if (username.isEmpty()) {
+            // Show an error message if the username field is empty
+            txtoutput.setText("Error: Username field must be filled out.");
+        } else if (password.isEmpty()) {
+            // Show an error message if the password field is empty
+            txtoutput.setText("Error: Password field must be filled out.");
+        } else if (authenticate(username, password)) {
+            // If authentication is successful
+            boolean isLoggedIn = true;
+
+            if (username.equals("Samir") && password.equals("12345678**abAB")) {
+
+                txtoutput.setText("Welcome, " + username + "!");
+
+                Home home = new Home();
+
+                home.pack();
+
+                home.setLocationRelativeTo(null);
+
+                home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                new Home().setVisible(true);
+                this.dispose();
+            } else {
+                // Show an error message if authentication fails
+                txtoutput.setText("Invalid username or password.");
+            }
+        }
     }//GEN-LAST:event_TxtloginActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginPage().setVisible(true);
-            }
-        });
-    }
+         * @param args the command line arguments
+//         */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoginPage().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Txtlogin;
@@ -198,6 +213,34 @@ public class LoginPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean authenticate(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        char x[] = password.toCharArray();
+
+        int upper = 0, lower = 0, digit = 0, symbol = 0;
+
+        for (char i : x) {
+
+            if (Character.isUpperCase(i)) {
+
+                ++upper;
+
+            } else if (Character.isLowerCase(i)) {
+
+                ++lower;
+
+            } else if (Character.isDigit(i)) {
+
+                ++digit;
+
+            } else {
+
+                ++symbol;
+
+            }
+
+        }
+
+        return x.length >= 8 && upper > 0 && lower > 0 && digit > 0 && symbol > 0;
+
     }
 }
