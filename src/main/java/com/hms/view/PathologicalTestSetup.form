@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,29 +27,40 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labeltesttitke" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
-                  <Component id="labeltestcost" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                  <Component id="labelavailability" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtTitle" max="32767" attributes="0"/>
-                      <Component id="txtCost" pref="299" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="labelavailability" min="-2" pref="112" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                      <Component id="SelectCheckbox" min="-2" pref="133" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="BtnSubmit" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" pref="133" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labeltesttitke" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="labeltestcost" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="labeltesttype" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                      <Component id="BtnCancel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txttesttype" min="-2" pref="299" max="-2" attributes="0"/>
+                          <Component id="txtTitle" min="-2" pref="299" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="BtnSubmit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="BtnCancel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtCost" min="-2" pref="299" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="299" max="32767" attributes="0"/>
+              <EmptySpace pref="171" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="labeloutput" min="-2" pref="342" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,27 +70,36 @@
               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labeltesttitke" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="txtTitle" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="txtTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="txtCost" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="labeltestcost" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labeltestcost" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="txtCost" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="txttesttype" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labeltesttype" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labelavailability" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="SelectCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelavailability" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BtnSubmit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="140" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="labeloutput" pref="100" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,7 +124,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtCost">
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="SelectCheckbox">
       <Properties>
         <Property name="text" type="java.lang.String" value="(No by Default)"/>
       </Properties>
@@ -109,6 +133,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSubmitActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnCancel">
       <Properties>
@@ -116,6 +143,21 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCancelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labeloutput">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Output"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labeltesttype">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test Type:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txttesttype">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txttesttypeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
