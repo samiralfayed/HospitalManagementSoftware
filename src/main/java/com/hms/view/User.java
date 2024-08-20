@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
  *
  * @author samir
  */
-public class LoginPage extends javax.swing.JFrame {
+public class User extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginPage
      */
-    public LoginPage() {
+    public User() {
         initComponents();
     }
 
@@ -145,7 +145,7 @@ public class LoginPage extends javax.swing.JFrame {
             // If authentication is successful
             boolean isLoggedIn = true;
 
-            if (username.equals("Samir") && password.equals("12345678**abAB")) {
+            //if (username.equals("Samir") && password.equals("12345678**abAB")) {
 
                 txtoutput.setText("Welcome, " + username + "!");
 
@@ -158,10 +158,11 @@ public class LoginPage extends javax.swing.JFrame {
                 home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 new Home().setVisible(true);
                 this.dispose();
-            } else {
+           // }
+           //   else {
                 // Show an error message if authentication fails
                 txtoutput.setText("Invalid username or password.");
-            }
+           // }
         }
     }//GEN-LAST:event_TxtloginActionPerformed
 
@@ -182,20 +183,20 @@ public class LoginPage extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new LoginPage().setVisible(true);
+//                new User().setVisible(true);
 //            }
 //        });
 //    }
@@ -240,7 +241,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         }
 
-        return x.length >= 8 && upper > 0 && lower > 0 && digit > 0 && symbol > 0;
+        return true;
 
     }
 }
