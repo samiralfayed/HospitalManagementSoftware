@@ -12,14 +12,17 @@ package com.hms.model;
 public class PathologicalTest {
   
     private String title;
+    private String testType;
     private double cost;
     private boolean isAvailable;
     
     
     public PathologicalTest( String title,
+                       String testType,
                        double cost,
                        boolean isAvailable){
         this.title = title;
+        this.testType = testType;
         this.cost = cost;
         this.isAvailable = isAvailable;
     }

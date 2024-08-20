@@ -8,7 +8,7 @@ package com.hms.model;
  *
  * @author samir
  */
-public class LoginPage {
+public class User {
     
      // Attributes
     String username;
@@ -16,7 +16,7 @@ public class LoginPage {
     boolean isLoggedIn;
 
     // Constructor
-    public LoginPage(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.isLoggedIn = false; // Initially not logged in
