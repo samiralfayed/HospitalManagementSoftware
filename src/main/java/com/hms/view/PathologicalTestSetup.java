@@ -13,7 +13,6 @@ import javax.swing.SpinnerModel;
  *
  * @author Md. Samir Al Fayed Ifti
  */
-
 public class PathologicalTestSetup extends javax.swing.JFrame {
 
     /**
@@ -26,7 +25,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
             "Blood Test",
             "Urine Test",
             "X-Ray",
-            "MRI Scan"  
+            "MRI Scan"
         }));
 //        txttesttype.addActionListener(new java.awt.event.ActionListener() {
 //            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,42 +190,44 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
 //                Double.parseDouble(txtCost.getText()),
 //                SelectCheckbox.isSelected());
 //        labeloutput.setText(pTest.show());
+        String testTitle = txtTitle.getText();
+        String testCost = txtCost.getText();
+        boolean isAvailable = SelectCheckbox.isSelected();
+        String testType = txttesttype.getSelectedItem().toString(); // Get the selected test type
 
         // Validate the inputs (e.g., ensure that the title and cost are not empty)
-        // Retrieve the input values from the form fields
-     String testTitle = txtTitle.getText();
-    String testCost = txtCost.getText();
-    boolean isAvailable = SelectCheckbox.isSelected();
-    String testType = txttesttype.getSelectedItem().toString(); // Get the selected test type
+        if (testTitle.isEmpty() || testCost.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // Validate the inputs (e.g., ensure that the title and cost are not empty)
-    if (testTitle.isEmpty() || testCost.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        try {
+            double cost = Double.parseDouble(testCost); // Attempt to parse the cost as a double
 
-    try {
-        double cost = Double.parseDouble(testCost); // Attempt to parse the cost as a double
+            if (cost < 0) { // Check if the cost is negative
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter a positive number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Create a summary message with the collected data
-        String availabilityText = isAvailable ? "Yes" : "No";
-        String message = "<html>Test Title: " + testTitle 
-                        + "<br>Test Type: " + testType 
-                        + "<br>Test Cost: BDT " + cost 
-                        + "<br>Available: " + availabilityText + "</html>";
+            // Create a summary message with the collected data
+            String availabilityText = isAvailable ? "Yes" : "No";
+            String message = "<html>Test Title: " + testTitle
+                    + "<br>TestCost: " + cost
+                    + "<br>Test Type: " + testType
+                    + "<br>Available: " + availabilityText + "</html>";
 
-        // Display the collected data in the output label
-        labeloutput.setText(message);
+            
+            labeloutput.setText(message);
 
-        // Optionally, clear the form fields after submission
-        txtTitle.setText("");
-        txtCost.setText("");
-        SelectCheckbox.setSelected(false);
-        txttesttype.setSelectedIndex(0);
+            // Optionally, clear the form fields after submission
+            txtTitle.setText("");
+            txtCost.setText("");
+            SelectCheckbox.setSelected(false);
+            txttesttype.setSelectedIndex(0);
 
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_BtnSubmitActionPerformed
 
@@ -238,36 +239,36 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(PathologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new PathologicalTestSetup().setVisible(true);
-        }
-    });
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PathologicalTestSetup().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancel;
