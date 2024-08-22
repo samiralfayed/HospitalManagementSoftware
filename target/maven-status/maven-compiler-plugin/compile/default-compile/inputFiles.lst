@@ -1,7 +1,10 @@
 H:\HospitalManagementSoftware\src\main\java\com\hms\model\User.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\User.java
+H:\HospitalManagementSoftware\src\main\java\com\hms\controller\PathologicalTestController.java
+H:\HospitalManagementSoftware\src\main\java\com\hms\model\LabTest.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\PathologicalTestSetup.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\Home.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\PathologicalTestSearch.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\controller\HospitalManagementSoftware.java
+H:\HospitalManagementSoftware\src\main\java\com\hms\model\RadiologicalTest.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\model\PathologicalTest.java

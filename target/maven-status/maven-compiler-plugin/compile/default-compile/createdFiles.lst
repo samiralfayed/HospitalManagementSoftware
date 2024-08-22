@@ -4,10 +4,13 @@ com\hms\view\User$1.class
 com\hms\view\PathologicalTestSetup.class
 com\hms\view\PathologicalTestSetup$4.class
 com\hms\view\PathologicalTestSetup$1.class
+com\hms\controller\PathologicalTestController.class
 com\hms\model\User.class
 com\hms\view\PathologicalTestSearch.class
 com\hms\view\PathologicalTestSearch$1.class
 com\hms\view\User$2.class
+com\hms\model\RadiologicalTest.class
+com\hms\model\LabTest.class
 com\hms\view\Home$2.class
 com\hms\view\PathologicalTestSetup$2.class
 com\hms\view\Home$1.class

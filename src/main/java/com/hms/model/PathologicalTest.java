@@ -7,38 +7,47 @@ package com.hms.model;
 /**
  *
  * @author Samir Al Fayed Ifti
-
+ *
  */
-public class PathologicalTest {
-  
-    private String title;
-    private String testType;
-    private double cost;
-    private boolean isAvailable;
-    
-    
-    public PathologicalTest( String title,
-                       String testType,
-                       double cost,
-                       boolean isAvailable){
+public class PathologicalTest extends LabTest {
+
+    private String reagent;
+
+    public PathologicalTest(String title,
+            String reagent,
+            double cost,
+            boolean isAvailable) {
         this.title = title;
-        this.testType = testType;
+        this.reagent = reagent;
         this.cost = cost;
         this.isAvailable = isAvailable;
     }
-    
-    public String show(){
-        String output = "Test Name: "+this.getTitle()+"\n<br>" +"Cost: "+this.getCost()+"\n<br>"+"Availability: "+this.isIsAvailable();
+
+    public PathologicalTest() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public String returnLabTestInfo() {
+        String output = "Test Name: " + this.getTitle() + "\n<br>" + "Reagent Name: " + this.getReagent() + "\n<br>" + "Cost: " + this.getCost() + "\n<br>" + "Availability: " + this.isIsAvailable();
         return output;
     }
-    
-   public void search(String title){
-       if (this.getTitle() == title)
-           show();
-       else
-           System.out.println("Not Found");
-       
-   } 
+
+    public String getReagent() {
+        return reagent;
+    }
+
+    public void setReagent(String reagent) {
+        this.reagent = reagent;
+    }
+
+    public void search(String title) {
+        if (this.getTitle() == title) {
+            returnLabTestInfo();
+        } else {
+            System.out.println("Not Found");
+        }
+
+    }
 
     /**
      * @return the title
@@ -80,5 +89,13 @@ public class PathologicalTest {
      */
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+
+    public String show() {
+       // return "PathologicalTest{" + "reagent=" + reagent + '}';
+//        super.toString()+reagent;
+//        return  super.toString()+reagent;
+
+        return super.toString() + "\n" + reagent;
     }
 }
