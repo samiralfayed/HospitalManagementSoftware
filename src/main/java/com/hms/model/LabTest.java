@@ -33,7 +33,7 @@ public class LabTest {
         this.isAvailable = isAvailable;
     }
 
-    public String returnLabTestInfo() {
+    public String returnrLabTestInfo() {
         String output = "Test Name: " + this.getTitle() + "\n"+  "Cost: " + this.getCost() + "\n"
                 + "Availability: " + this.isIsAvailable();
         return output;
