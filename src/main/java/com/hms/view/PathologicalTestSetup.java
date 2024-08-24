@@ -6,6 +6,7 @@ package com.hms.view;
 
 import com.hms.model.LabTest;
 import com.hms.model.PathologicalTest;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,7 +54,6 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
         SelectCheckbox = new javax.swing.JCheckBox();
         BtnSubmit = new javax.swing.JButton();
         BtnCancel = new javax.swing.JButton();
-        labeloutput = new javax.swing.JLabel();
         labeltesttype = new javax.swing.JLabel();
         txttesttype = new javax.swing.JComboBox<>();
         labelReagent = new javax.swing.JLabel();
@@ -90,8 +90,6 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
             }
         });
 
-        labeloutput.setText("Output");
-
         labeltesttype.setText("Test Type:");
 
         txttesttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -107,10 +105,6 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(227, Short.MAX_VALUE)
-                .addComponent(labeloutput, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +132,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(txtReagent, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,9 +164,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSubmit)
                     .addComponent(BtnCancel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labeloutput, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,13 +177,13 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
 
     private void BtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSubmitActionPerformed
         // TODO add your handling code here:
-        String testTitle = txtTitle.getText();
-        String testReagent = txtReagent.getText();
-        String testCost = txtCost.getText();
+        String testTitle = txtTitle.getText().trim();
+        String testReagent = txtReagent.getText().trim();
+        String testCost = txtCost.getText().trim();
         boolean isAvailable = SelectCheckbox.isSelected();
         String testType = txttesttype.getSelectedItem().toString();
 
-        // Validate the inputs
+// Validate the inputs
         if (testTitle.isEmpty() || testCost.isEmpty() || testReagent.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
@@ -214,17 +206,24 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                     + "\nReagent Name: " + test.getReagent()
                     + "\nTest Cost: " + test.getCost()
                     + "\nTest Type: " + testType
-                    + "\nAvailable: " + availabilityText;
+                    + "\nAvailable: " + availabilityText + "\n\n"
+                    + "Do you want to save this information?";
 
-            // Show the summary message in a dialog box
-            javax.swing.JOptionPane.showMessageDialog(this, message, "Test Summary", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            int response = JOptionPane.showConfirmDialog(this, message, "Confirm Submission", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-            // Optionally, clear the form fields after submission
-            txtTitle.setText("");
-            txtReagent.setText("");
-            txtCost.setText("");
-            SelectCheckbox.setSelected(false);
-            txttesttype.setSelectedIndex(0);
+            // If the user confirms the submission
+            if (response == JOptionPane.YES_OPTION) {
+                // Save the data (this is where you'd typically interact with your backend or database)
+                // Show success message
+                JOptionPane.showMessageDialog(this, "Test information saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                // Clear the input fields for new data entry
+                txtTitle.setText("");
+                txtReagent.setText("");
+                txtCost.setText("");
+                SelectCheckbox.setSelected(false);
+                txttesttype.setSelectedIndex(0);
+            }
 
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -281,7 +280,6 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel labelReagent;
     private javax.swing.JLabel labelavailability;
-    private javax.swing.JLabel labeloutput;
     private javax.swing.JLabel labeltestcost;
     private javax.swing.JLabel labeltesttitke;
     private javax.swing.JLabel labeltesttype;

@@ -27,7 +27,8 @@ public class PathologicalTest extends LabTest {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public String returnLabTestInfo() {
+    @Override
+    public String returnrLabTestInfo() {
         String output = "Test Name: " + this.getTitle() + "\n<br>" + "Reagent Name: " + this.getReagent() + "\n<br>" + "Cost: " + this.getCost() + "\n<br>" + "Availability: " + this.isIsAvailable();
         return output;
     }
@@ -42,7 +43,7 @@ public class PathologicalTest extends LabTest {
 
     public void search(String title) {
         if (this.getTitle() == title) {
-            returnLabTestInfo();
+            returnrLabTestInfo();
         } else {
             System.out.println("Not Found");
         }

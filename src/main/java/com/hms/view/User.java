@@ -146,29 +146,28 @@ public class User extends javax.swing.JFrame {
             boolean isLoggedIn = true;
 
             //if (username.equals("Samir") && password.equals("12345678**abAB")) {
+            txtoutput.setText("Welcome, " + username + "!");
 
-                txtoutput.setText("Welcome, " + username + "!");
+            Home home = new Home();
 
-                Home home = new Home();
+            home.pack();
 
-                home.pack();
+            home.setLocationRelativeTo(null);
 
-                home.setLocationRelativeTo(null);
-
-                home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                new Home().setVisible(true);
-                this.dispose();
-           // }
-           //   else {
-                // Show an error message if authentication fails
-                txtoutput.setText("Invalid username or password.");
-           // }
+            home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            new Home().setVisible(true);
+            this.dispose();
+            // }
+            //   else {
+            // Show an error message if authentication fails
+            txtoutput.setText("Invalid username or password.");
+            // }
         }
     }//GEN-LAST:event_TxtloginActionPerformed
 
     /**
-         * @param args the command line arguments
-//         */
+     * @param args the command line arguments //
+     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -215,33 +214,36 @@ public class User extends javax.swing.JFrame {
 
     private boolean authenticate(String username, String password) {
 
-        char x[] = password.toCharArray();
-
-        int upper = 0, lower = 0, digit = 0, symbol = 0;
-
-        for (char i : x) {
-
-            if (Character.isUpperCase(i)) {
-
-                ++upper;
-
-            } else if (Character.isLowerCase(i)) {
-
-                ++lower;
-
-            } else if (Character.isDigit(i)) {
-
-                ++digit;
-
-            } else {
-
-                ++symbol;
-
-            }
-
+        if (password.length() < 8) {
+            // Show a warning if the password is too short
+            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Password Error", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
 
-        return true;
+        char[] x = password.toCharArray();
+        int upper = 0, lower = 0, digit = 0, symbol = 0;
 
+        // Check for character types in the password
+        for (char i : x) {
+            if (Character.isUpperCase(i)) {
+                ++upper;
+            } else if (Character.isLowerCase(i)) {
+                ++lower;
+            } else if (Character.isDigit(i)) {
+                ++digit;
+            } else {
+                ++symbol;
+            }
+        }
+
+        // Additional password validation logic (if any) can go here
+        // one lower case letter, one digit, and one symbol.
+        if (upper > 0 && lower > 0 && digit > 0 && symbol > 0) {
+            return true;
+        } else {
+            // Show a warning if the password does not meet the criteria
+            JOptionPane.showMessageDialog(null, "Password must contain at least one upper case letter, one lower case letter, one digit, and one symbol.", "Password Error", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
     }
 }

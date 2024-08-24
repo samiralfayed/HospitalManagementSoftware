@@ -16,8 +16,8 @@ public class HospitalManagementSoftware {
 
     public static void main(String[] args) {
 //        System.out.println("Hello World!");
-        new User().setVisible(true);
-//         new Home().setVisible(true);
+          new User().setVisible(true);
+//         
 //        PathologicalTest pTest = new PathologicalTest("CBC","Chemical", 400, true);
 //        System.out.println(pTest.returnLabTestInfo());
 //
