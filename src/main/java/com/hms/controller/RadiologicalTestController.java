@@ -19,5 +19,18 @@ public class RadiologicalTestController {
          String rTestInfo = rTest.show();
          return rTestInfo;
    }
+   
+   /////////
+    public double getTestCost() {
+        return rTest.calculateTestCost();
+    }
+
+    public double getTotalCostForTests(int numberOfTests) {
+        return rTest.calculateTotalCost(numberOfTests);
+    }
+
+    public double getDiscountedCost(double discountPercentage) {
+        return rTest.applyDiscount(discountPercentage);
+    }
     
 }

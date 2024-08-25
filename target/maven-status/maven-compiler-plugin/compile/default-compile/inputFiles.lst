@@ -1,5 +1,6 @@
 H:\HospitalManagementSoftware\src\main\java\com\hms\model\User.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\User.java
+H:\HospitalManagementSoftware\src\main\java\com\hms\model\TestReport.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\RadiologicalTestSearch.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\controller\HospitalManagementSoftware.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\model\RadiologicalTest.java
@@ -11,3 +12,4 @@ H:\HospitalManagementSoftware\src\main\java\com\hms\view\Home.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\PathologicalTestSearch.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\model\PathologicalTest.java
 H:\HospitalManagementSoftware\src\main\java\com\hms\view\RadiologicalTestSetup.java
+H:\HospitalManagementSoftware\src\main\java\com\hms\model\CostCalculation.java
