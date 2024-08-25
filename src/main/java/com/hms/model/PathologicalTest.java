@@ -9,7 +9,7 @@ package com.hms.model;
  * @author Samir Al Fayed Ifti
  *
  */
-public class PathologicalTest extends LabTest {
+public class PathologicalTest extends LabTest implements CostCalculation, TestReport{
 
     private String reagent;
 
@@ -99,4 +99,20 @@ public class PathologicalTest extends LabTest {
 
         return super.toString() + "\n" + reagent;
     }
+// Calculate Test Cost
+     @Override
+    public double calculateTestCost() {
+        return cost;
+    }
+
+    @Override
+    public double calculateTotalCost(int numberOfTests) {
+        return numberOfTests * cost;
+    }
+
+    @Override
+    public double applyDiscount(double discountPercentage) {
+        return cost - (cost * (discountPercentage / 100));
+    }
+
 }

@@ -8,7 +8,7 @@ package com.hms.model;
  *
  * @author samir
  */
-public class RadiologicalTest extends LabTest {
+public class RadiologicalTest extends LabTest implements CostCalculation,TestReport {
 
   private  String plateDimention;
 
@@ -46,5 +46,24 @@ public class RadiologicalTest extends LabTest {
          String output = "Test Name: " + this.getTitle() + "\n<br>" + "plate Dimention: " + this.getPlateDimention() + "\n<br>" + "Cost: " + this.getCost() + "\n<br>" + "Availability: " + this.isIsAvailable();
         return output;
     }
+// Calculate the cost
+     @Override
+    public double calculateTestCost() {
+        return cost;
+    }
+
+    @Override
+    public double calculateTotalCost(int numberOfTests) {
+        return numberOfTests * cost;
+    }
+
+    @Override
+    public double applyDiscount(double discountPercentage) {
+        return cost - (cost * discountPercentage / 100);
+    }
+
+
+    
+
 
 }

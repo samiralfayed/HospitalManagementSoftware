@@ -1,3 +1,4 @@
+com\hms\model\CostCalculation.class
 com\hms\view\Home$5.class
 com\hms\view\RadiologicalTestSearch$1.class
 com\hms\view\RadiologicalTestSetup$1.class
@@ -30,4 +31,5 @@ com\hms\view\RadiologicalTestSearch.class
 com\hms\controller\HospitalManagementSoftware.class
 com\hms\view\Home$3.class
 com\hms\view\RadiologicalTestSearch$2.class
+com\hms\model\TestReport.class
 com\hms\view\PathologicalTestSearch$3.class
