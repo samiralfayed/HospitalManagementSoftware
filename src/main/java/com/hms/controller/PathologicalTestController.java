@@ -5,6 +5,8 @@
 package com.hms.controller;
 
 import com.hms.model.PathologicalTest;
+import com.hms.model.TestReport;
+import com.hms.model.PathologicalTestCostCalculation;
 
 /**
  *
@@ -22,18 +24,4 @@ public class PathologicalTestController {
         String pTestInfo = pTest.show();
         return pTestInfo;
     }
-
-    ///
-//    public double getTestCost() {
-//        return pTest.calculateTestCost();
-//    }
-//
-//    public double getTotalCostForTests(int numberOfTests) {
-//        return pTest.calculateTotalCost(numberOfTests);
-//    }
-//
-//    public double getDiscountedCost(double discountPercentage) {
-//        return pTest.applyDiscount(discountPercentage);
-//    }
-
 }

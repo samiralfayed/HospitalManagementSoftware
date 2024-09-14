@@ -4,13 +4,19 @@
  */
 package com.hms.model;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author samir
  */
-public class RadiologicalTest extends LabTest implements CostCalculation,TestReport {
+public class RadiologicalTest extends LabTest{
 
-  private  String plateDimention;
+    private String plateDimention;
+    private static final Logger LOG = Logger.getLogger(RadiologicalTest.class.getName());
+
+    public RadiologicalTest() {
+    }
 
     public RadiologicalTest(String title,
             double cost,
@@ -19,12 +25,13 @@ public class RadiologicalTest extends LabTest implements CostCalculation,TestRep
         super(title, cost, isAvailable); // Call the superclass constructor
         this.title = title;
         this.cost = cost;
-       this.plateDimention = plateDimention;
+        this.plateDimention = plateDimention;
         this.isAvailable = isAvailable;
     }
-  @Override
+
+    @Override
     public String returnrLabTestInfo() {
-        String output = "Test Name: " + this.getTitle() + "\n<br>"+ "Cost: " + this.getCost() + "\n<br>" + "plate Dimention: " + this.getTitle()+ "\n<br>" + "Availability: " + this.isIsAvailable();
+        String output = "Test Name: " + this.getTitle() + "\n<br>" + "Cost: " + this.getCost() + "\n<br>" + "plate Dimention: " + this.getTitle() + "\n<br>" + "Availability: " + this.isIsAvailable();
         return output;
     }
 
@@ -43,27 +50,7 @@ public class RadiologicalTest extends LabTest implements CostCalculation,TestRep
     }
 
     public String show() {
-         String output = "Test Name: " + this.getTitle() + "\n<br>" + "plate Dimention: " + this.getPlateDimention() + "\n<br>" + "Cost: " + this.getCost() + "\n<br>" + "Availability: " + this.isIsAvailable();
+        String output = "Test Name: " + this.getTitle() + "\n<br>" + "plate Dimention: " + this.getPlateDimention() + "\n<br>" + "Cost: " + this.getCost() + "\n<br>" + "Availability: " + this.isIsAvailable();
         return output;
     }
-// Calculate the cost
-     @Override
-    public double calculateTestCost() {
-        return cost;
-    }
-
-    @Override
-    public double calculateTotalCost(int numberOfTests) {
-        return numberOfTests * cost;
-    }
-
-    @Override
-    public double applyDiscount(double discountPercentage) {
-        return cost - (cost * discountPercentage / 100);
-    }
-
-
-    
-
-
 }

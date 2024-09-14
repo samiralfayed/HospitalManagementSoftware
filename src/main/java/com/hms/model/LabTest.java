@@ -8,7 +8,7 @@ package com.hms.model;
  *
  * @author samir
  */
-public class LabTest {
+public abstract class LabTest {
 
     protected String title;
     protected double cost;
@@ -18,17 +18,16 @@ public class LabTest {
     public LabTest() {
     }
 
+
     @Override
     public String toString() {
         return "LabTest{" + "title=" + title + ", cost=" + cost + ", isAvailable=" + isAvailable + '}';
     }
 
     public LabTest(String title,
-          //  String reagent,
             double cost,
             boolean isAvailable) {
         this.title = title;
-       // this.reagent = reagent;
         this.cost = cost;
         this.isAvailable = isAvailable;
     }

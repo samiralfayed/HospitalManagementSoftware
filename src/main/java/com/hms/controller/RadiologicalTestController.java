@@ -11,26 +11,15 @@ import com.hms.model.RadiologicalTest;
  * @author samir
  */
 public class RadiologicalTestController {
+
     RadiologicalTest rTest;
-    public void initializeRadiologicalTest(String title,double cost,String plateDimention,boolean isAvailable){
-        rTest = new RadiologicalTest(title, cost,plateDimention, isAvailable);
-    }
-   public String returnrLabTestInfo(){
-         String rTestInfo = rTest.show();
-         return rTestInfo;
-   }
-   
-   /////////
-    public double getTestCost() {
-        return rTest.calculateTestCost();
+
+    public void initializeRadiologicalTest(String title, double cost, String plateDimention, boolean isAvailable) {
+        rTest = new RadiologicalTest(title, cost, plateDimention, isAvailable);
     }
 
-    public double getTotalCostForTests(int numberOfTests) {
-        return rTest.calculateTotalCost(numberOfTests);
+    public String returnrLabTestInfo() {
+        String rTestInfo = rTest.show();
+        return rTestInfo;
     }
-
-    public double getDiscountedCost(double discountPercentage) {
-        return rTest.applyDiscount(discountPercentage);
-    }
-    
 }
