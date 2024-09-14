@@ -4,6 +4,11 @@
  */
 package com.hms.view;
 
+import com.hms.model.MySQLConnection;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,11 +25,17 @@ public class RadiologicalTestSetup extends javax.swing.JFrame {
 
         txttesttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
             "X-ray",
-            "UltraSound",
+            "Ultrasound",
             "MRI",
             "CT Scan",
             "Mammography",
-            "Bone Scan"
+            "Bone Scan",
+            "PET Scan",
+            "Fluoroscopy",
+            "Angiography",
+            "Contrast-enhanced CT",
+            "Contrast-enhanced MRI",
+            "DEXA Scan"
         }));
     }
 
@@ -161,50 +172,65 @@ public class RadiologicalTestSetup extends javax.swing.JFrame {
 
     private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
         // TODO add your handling code here:
-        String testTitle = txttesttitle.getText().trim();
-        String testCost = txttestcost.getText().trim();
+        String title = txttesttitle.getText().trim();
+        String costText = txttestcost.getText().trim();
         String plateDimension = txtplatedimention.getText().trim();
         boolean isAvailable = jCheckBox1.isSelected();
-        String testType = txttesttype.getSelectedItem().toString(); // Retrieve the selected item from the combo box
+        String testType = txttesttype.getSelectedItem().toString();
 
-        // Validation checks
-        if (testTitle.isEmpty() || testCost.isEmpty() || plateDimension.isEmpty() || testType.isEmpty()) {
+        // Validate input fields
+        if (title.isEmpty() || costText.isEmpty() || plateDimension.isEmpty() || testType.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Check if the testCost is a valid number
         try {
-            Double.parseDouble(testCost);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric value for Test Cost.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            double cost = Double.parseDouble(costText);
+            if (cost < 0) {
+                JOptionPane.showMessageDialog(this, "Please enter a positive number for the cost.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Insert data into the database
+            insertRadiologicalTestIntoDatabase(title, cost, plateDimension, isAvailable, testType);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for Test Cost.", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
 
-        // Confirmation message
-        String availabilityText = isAvailable ? "Yes" : "No";
-        String confirmationMessage = "Test Title: " + testTitle + "\n"
-                + "Test Cost: " + testCost + "\n"
-                + "Plate Dimension: " + plateDimension + "\n"
-                + "Availability: " + availabilityText + "\n"
-                + "Test Type: " + testType + "\n\n"
-                + "Do you want to save this information?";
+    private void insertRadiologicalTestIntoDatabase(String title, double cost, String plateDimension, boolean available, String type) {
+        // Use MySQLConnection to get the connection
+        try (Connection conn = MySQLConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(
+                "INSERT INTO RadiologicalTest (test_title, test_cost, plate_dimension, availability, test_type) VALUES (?, ?, ?, ?, ?)")) {
 
-        int response = JOptionPane.showConfirmDialog(this, confirmationMessage, "Confirm Submission", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            // Set the parameters for the SQL statement
+            pstmt.setString(1, title);
+            pstmt.setDouble(2, cost);
+            pstmt.setString(3, plateDimension);
+            pstmt.setBoolean(4, available);
+            pstmt.setString(5, type);
 
-        // If the user confirms the submission
-        if (response == JOptionPane.YES_OPTION) {
-            // Save the data (this is where you'd typically interact with your backend or database)
-            // Show success message
-            JOptionPane.showMessageDialog(this, "Test information saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            // Execute the SQL statement
+            int rowsAffected = pstmt.executeUpdate();
 
-            // Clear the input fields for new data entry
-            txttesttitle.setText("");
-            txttestcost.setText("");
-            txtplatedimention.setText("");
-            txttesttype.setSelectedIndex(0);
-            jCheckBox1.setSelected(false);
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(this, "Test information saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearInputFields();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to insert data.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
+    }
+
+    private void clearInputFields() {
+        txttesttitle.setText("");
+        txttestcost.setText("");
+        txtplatedimention.setText("");
+        txttesttype.setSelectedIndex(0);
+        jCheckBox1.setSelected(false);
     }//GEN-LAST:event_btnsubmitActionPerformed
 
     private void txttesttypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttesttypeActionPerformed
@@ -214,37 +240,37 @@ public class RadiologicalTestSetup extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new RadiologicalTestSetup().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(RadiologicalTestSetup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RadiologicalTestSetup().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncancel;

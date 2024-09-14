@@ -4,7 +4,16 @@
  */
 package com.hms.view;
 
+import static com.hms.model.MySQLConnection.getConnection;
+import com.hms.model.PathologicalTest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,7 +25,16 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
      * Creates new form PathologicalTestSearch
      */
     public PathologicalTestSearch() {
+
         initComponents();
+
+    }
+
+    private Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/hms";
+        String user = "root";
+        String password = "@Samir1691997";
+        return DriverManager.getConnection(url, user, password);
     }
 
     /**
@@ -32,6 +50,8 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
         txtptest = new javax.swing.JTextField();
         BtnSearch = new javax.swing.JButton();
         BtnCancel = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,34 +71,61 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title ", "Cost", "Available?", "Action"
+            }
+        ));
+        jTable1.setToolTipText("");
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Title ");
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("Cost");
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("Available?");
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("Action");
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(labelsearchpathelogicaltest, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtptest, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BtnSearch)
-                .addContainerGap(72, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnCancel)
-                .addGap(277, 277, 277))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(labelsearchpathelogicaltest, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtptest, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnSearch))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(311, 311, 311)
+                        .addComponent(BtnCancel)))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtptest, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelsearchpathelogicaltest, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnSearch))
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(BtnCancel)
-                .addGap(262, 262, 262))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88))
         );
 
         pack();
@@ -91,28 +138,49 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
 
     private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
         // TODO add your handling code here:
-        String searchTerm = txtptest.getText().trim();
+        String searchQuery = txtptest.getText().trim();
 
-// Sample list of pathological tests (in a real application, you would query a database)
-        String[] pathologicalTests = {"Blood Test", "Urine Test", "X-Ray", "CT Scan", "MRI", "Biopsy"};
+        if (searchQuery.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a test title to search.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-// StringBuilder to hold the search results
-        StringBuilder results = new StringBuilder();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);  // Clear any existing data in the table
 
-// Perform the search
-        for (String test : pathologicalTests) {
-            if (test.toLowerCase().contains(searchTerm)) {
-                results.append(test).append("\n");
+        try {
+            Connection conn = getConnection();
+
+            String query = "SELECT title, cost, available FROM PathologicalTest WHERE title LIKE ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "%" + searchQuery + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                JOptionPane.showMessageDialog(this, "No matching tests found.", "Info", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
-        }
 
-// Display the results in a dialog box
-        if (results.length() > 0) {
-            JOptionPane.showMessageDialog(this, "Test is found : " +results.toString(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "No tests found for: " + searchTerm, "Search Results", JOptionPane.INFORMATION_MESSAGE);
-        }
+            while (rs.next()) {
+                String title = rs.getString("title");
+                double cost = rs.getDouble("cost");
+                boolean available = rs.getBoolean("available");
 
+                String availability = available ? "Yes" : "No";
+                Object[] rowData = {title, cost, availability, "Edit/Delete"};
+
+                model.addRow(rowData);
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_BtnSearchActionPerformed
 
     /**
@@ -120,6 +188,7 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -153,6 +222,8 @@ public class PathologicalTestSearch extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancel;
     private javax.swing.JButton BtnSearch;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelsearchpathelogicaltest;
     private javax.swing.JTextField txtptest;
     // End of variables declaration//GEN-END:variables

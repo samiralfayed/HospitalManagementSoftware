@@ -4,6 +4,8 @@
  */
 package com.hms.view;
 
+import com.hms.model.PathologicalTest;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,18 +34,13 @@ public class Home extends javax.swing.JFrame {
         btnlogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuHome = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        menuptestsearch = new javax.swing.JMenuItem();
-        menuptestSetup = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        menurtestsearch = new javax.swing.JMenuItem();
-        menurtestSetup = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menupsearch = new javax.swing.JMenuItem();
+        menupsetup = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menursearch = new javax.swing.JMenuItem();
+        menursetup = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,62 +57,45 @@ public class Home extends javax.swing.JFrame {
         menuHome.setText("Home");
         jMenuBar1.add(menuHome);
 
-        jMenu2.setText("Pathelogical Test");
-
-        menuptestsearch.setText("Search");
-        menuptestsearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuptestsearchActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menuptestsearch);
-
-        menuptestSetup.setText("Setup (input)");
-        menuptestSetup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuptestSetupActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menuptestSetup);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Radiological Test");
-
-        menurtestsearch.setText("Search");
-        menurtestsearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menurtestsearchActionPerformed(evt);
-            }
-        });
-        jMenu3.add(menurtestsearch);
-
-        menurtestSetup.setText("Setup (input)");
-        menurtestSetup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menurtestSetupActionPerformed(evt);
-            }
-        });
-        jMenu3.add(menurtestSetup);
-
-        jMenuBar1.add(jMenu3);
-
         jMenu4.setText("Medical Test");
 
         jMenu1.setText("Pathological Test");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
+        menupsearch.setText("Search");
+        menupsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menupsearchActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menupsearch);
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenu1.add(jMenuItem2);
+        menupsetup.setText("Setup(input)");
+        menupsetup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menupsetupActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menupsetup);
 
         jMenu4.add(jMenu1);
 
-        jMenu5.setText("jMenu5");
+        jMenu5.setText("Rdiological Test");
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu5.add(jMenuItem3);
+        menursearch.setText("Search");
+        menursearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menursearchActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menursearch);
+
+        menursetup.setText("Setup(input)");
+        menursetup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menursetupActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menursetup);
 
         jMenu4.add(jMenu5);
 
@@ -160,25 +140,25 @@ public class Home extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnlogoutActionPerformed
 
-    private void menurtestSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menurtestSetupActionPerformed
-        // TODO add your handling code here:
-        new RadiologicalTestSetup().setVisible(true);
-    }//GEN-LAST:event_menurtestSetupActionPerformed
+    private void menupsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menupsearchActionPerformed
+         // TODO add your handling code here:
+        new PathologicalTestSearch().setVisible(true);
+    }//GEN-LAST:event_menupsearchActionPerformed
 
-    private void menurtestsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menurtestsearchActionPerformed
-        // TODO add your handling code here:
-        new RadiologicalTestSearch().setVisible(true);
-    }//GEN-LAST:event_menurtestsearchActionPerformed
-
-    private void menuptestSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuptestSetupActionPerformed
+    private void menupsetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menupsetupActionPerformed
         // TODO add your handling code here:
         new PathologicalTestSetup().setVisible(true);
-    }//GEN-LAST:event_menuptestSetupActionPerformed
+    }//GEN-LAST:event_menupsetupActionPerformed
 
-    private void menuptestsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuptestsearchActionPerformed
+    private void menursearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menursearchActionPerformed
         // TODO add your handling code here:
-        new PathologicalTestSearch().setVisible(true);
-    }//GEN-LAST:event_menuptestsearchActionPerformed
+        new RadiologicalTestSearch().setVisible(true);
+    }//GEN-LAST:event_menursearchActionPerformed
+
+    private void menursetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menursetupActionPerformed
+        // TODO add your handling code here:
+        new RadiologicalTestSetup().setVisible(true);
+    }//GEN-LAST:event_menursetupActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,19 +199,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnlogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuHome;
-    private javax.swing.JMenuItem menuptestSetup;
-    private javax.swing.JMenuItem menuptestsearch;
-    private javax.swing.JMenuItem menurtestSetup;
-    private javax.swing.JMenuItem menurtestsearch;
+    private javax.swing.JMenuItem menupsearch;
+    private javax.swing.JMenuItem menupsetup;
+    private javax.swing.JMenuItem menursearch;
+    private javax.swing.JMenuItem menursetup;
     // End of variables declaration//GEN-END:variables
 
     private static class Login {
@@ -240,7 +215,7 @@ public class Home extends javax.swing.JFrame {
         }
 
         private void setVisible(boolean b) {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
     }
 }

@@ -5,8 +5,13 @@
 package com.hms.view;
 
 import com.hms.model.LabTest;
+import com.hms.model.MySQLConnection;
 import com.hms.model.PathologicalTest;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,24 +19,25 @@ import javax.swing.JOptionPane;
  */
 public class PathologicalTestSetup extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PathologicalTestSetup
-     */
     public PathologicalTestSetup() {
-        initComponents();
 
-        txttesttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
-            "Blood Test",
-            "Urine Test",
-            "X-Ray",
-            "MRI Scan"
-        }));
-//        txttesttype.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                txttesttypeActionPerformed(evt);
-//            }
-//        });
+        initComponents();
+        initComboBox();
     }
+    private void initComboBox() {
+    txttesttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { 
+        "Complete Blood Count (CBC)", 
+        "Hemoglobin (Hb)", 
+        "Platelet Count", 
+        "White Blood Cell (WBC) Count", 
+        "Erythrocyte Sedimentation Rate (ESR)", 
+        "Liver Function Test (LFT)", 
+        "Kidney Function Test (KFT)", 
+        "Blood Glucose", 
+        "Lipid Profile", 
+        "Uric Acid"
+    }));
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,7 +57,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
         labelavailability = new javax.swing.JLabel();
         txtTitle = new javax.swing.JTextField();
         txtCost = new javax.swing.JTextField();
-        SelectCheckbox = new javax.swing.JCheckBox();
+        chkAvailable = new javax.swing.JCheckBox();
         BtnSubmit = new javax.swing.JButton();
         BtnCancel = new javax.swing.JButton();
         labeltesttype = new javax.swing.JLabel();
@@ -74,7 +80,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
 
         labelavailability.setText("Available?");
 
-        SelectCheckbox.setText("(No by Default)");
+        chkAvailable.setText("(No by Default)");
 
         BtnSubmit.setText("Submit");
         BtnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +117,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107)
-                        .addComponent(SelectCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(chkAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labeltesttitke, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,7 +164,7 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
                     .addComponent(txttesttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SelectCheckbox)
+                    .addComponent(chkAvailable)
                     .addComponent(labelavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -180,54 +186,62 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
         String testTitle = txtTitle.getText().trim();
         String testReagent = txtReagent.getText().trim();
         String testCost = txtCost.getText().trim();
-        boolean isAvailable = SelectCheckbox.isSelected();
+        boolean isAvailable = chkAvailable.isSelected();
         String testType = txttesttype.getSelectedItem().toString();
 
-// Validate the inputs
+        // Validate input fields
         if (testTitle.isEmpty() || testCost.isEmpty() || testReagent.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         try {
-            double cost = Double.parseDouble(testCost); // Parse the cost as a double
-
-            if (cost < 0) { // Check if the cost is negative
-                javax.swing.JOptionPane.showMessageDialog(this, "Please enter a positive number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            double cost = Double.parseDouble(testCost);
+            if (cost < 0) {
+                JOptionPane.showMessageDialog(this, "Please enter a positive number for the cost.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Create a new PathologicalTest object with the provided data
-            PathologicalTest test = new PathologicalTest(testTitle, testReagent, cost, isAvailable);
+            // Insert data into the database
+            insertTestIntoDatabase(testTitle, testReagent, cost, isAvailable, testType);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for the cost.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-            // Create a summary message with the collected data
-            String availabilityText = isAvailable ? "Yes" : "No";
-            String message = "Test Title: " + test.getTitle()
-                    + "\nReagent Name: " + test.getReagent()
-                    + "\nTest Cost: " + test.getCost()
-                    + "\nTest Type: " + testType
-                    + "\nAvailable: " + availabilityText + "\n\n"
-                    + "Do you want to save this information?";
+    private void insertTestIntoDatabase(String title, String reagent, double cost, boolean available, String type) {
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String insertQuery = "INSERT INTO PathologicalTest (title, reagent, cost, available, test_type) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertQuery);
 
-            int response = JOptionPane.showConfirmDialog(this, message, "Confirm Submission", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            pstmt.setString(1, title);
+            pstmt.setString(2, reagent);
+            pstmt.setDouble(3, cost);
+            pstmt.setBoolean(4, available);
+            pstmt.setString(5, type);
 
-            // If the user confirms the submission
-            if (response == JOptionPane.YES_OPTION) {
-                // Save the data (this is where you'd typically interact with your backend or database)
-                // Show success message
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(this, "Test information saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                // Clear the input fields for new data entry
-                txtTitle.setText("");
-                txtReagent.setText("");
-                txtCost.setText("");
-                SelectCheckbox.setSelected(false);
-                txttesttype.setSelectedIndex(0);
+                clearInputFields();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to insert data.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-        } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for the cost.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
+    }
+
+    private void clearInputFields() {
+        txtTitle.setText("");
+        txtCost.setText("");
+        txtReagent.setText("");
+        chkAvailable.setSelected(false);
+        txttesttype.setSelectedIndex(0);
+
     }//GEN-LAST:event_BtnSubmitActionPerformed
 
     private void txttesttypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttesttypeActionPerformed
@@ -273,8 +287,8 @@ public class PathologicalTestSetup extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancel;
     private javax.swing.JButton BtnSubmit;
-    private javax.swing.JCheckBox SelectCheckbox;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox chkAvailable;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;

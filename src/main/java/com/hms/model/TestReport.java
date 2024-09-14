@@ -9,12 +9,12 @@ package com.hms.model;
  * @author samir
  */
 public interface TestReport {
-//    String generateReport();
+    String generateReport();
 
-//    String getTestTitle();
-//
-//    double getTestCost();
-//
-//    boolean isTestAvailable();
+    String getTestTitle();
+
+    double getTestCost();
+
+    boolean isTestAvailable();
     
 }
